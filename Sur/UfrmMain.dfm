@@ -312,4 +312,8 @@ object frmMain: TfrmMain
     Left = 104
     Top = 104
   end
+  object SaveDialog1: TSaveDialog
+    Left = 269
+    Top = 26
+  end
 end
