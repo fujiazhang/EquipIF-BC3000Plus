@@ -392,9 +392,8 @@ begin
       '调试日志'+#2+'CheckListBox'+#2+#2+'0'+#2+'注:强烈建议在正常运行时关闭'+#2+#3+
       '高值质控联机号'+#2+'Edit'+#2+#2+'2'+#2+#2+#3+
       '常值质控联机号'+#2+'Edit'+#2+#2+'2'+#2+#2+#3+
-      '低值质控联机号'+#2+'Edit'+#2+#2+'2'+#2+#2+#3+
-      '联机号起始位置'+#2+'Edit'+#2+#2+'2'+#2+'注:长度为4'+#2+#3;
-
+      '低值质控联机号'+#2+'Edit'+#2+#2+'2'+#2+#2+#3;
+      
   if ShowOptionForm('',Pchar(IniSection),Pchar(ss),Pchar(ChangeFileExt(Application.ExeName,'.ini'))) then
 	  UpdateConfig;
   end;
