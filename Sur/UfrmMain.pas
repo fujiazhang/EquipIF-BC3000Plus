@@ -416,14 +416,17 @@ end;
 procedure TfrmMain.Button1Click(Sender: TObject);
 var
   ls:Tstrings;
+  ss:String;
 begin
   OpenDialog1.DefaultExt := '.txt';
   OpenDialog1.Filter := 'txt (*.txt)|*.txt';
   if not OpenDialog1.Execute then exit;
   ls:=Tstringlist.Create;
   ls.LoadFromFile(OpenDialog1.FileName);
-  ComDataPacket1Packet(nil,ls.Text);
+  ss:=ls.Text;
   ls.Free;
+  ss:=copy(ss,1,pos(#$1A,ss));//测试文件末尾可能有回车换行(#$D#$A)之类的多余字符
+  ComDataPacket1Packet(nil,ss);
 end;
 
 procedure TfrmMain.ToolButton5Click(Sender: TObject);
@@ -513,7 +516,8 @@ begin
   if bRegister then
   begin
     FInts :=CreateOleObject('Data2LisSvr.Data2Lis');
-    FInts.fData2Lis(ReceiveItemInfo,(SpecNo),'',
+    FInts.fData2Lis(ReceiveItemInfo,(SpecNo),
+      copy(Str,28,4)+'-'+copy(Str,24,2)+'-'+copy(Str,26,2)+' '+copy(Str,32,2)+':'+copy(Str,34,2)+':00',
       (GroupName),(SpecType),(SpecStatus),(EquipChar),
       (CombinID),'',(LisFormCaption),(ConnectString),
       (QuaContSpecNoG),(QuaContSpecNo),(QuaContSpecNoD),'',
